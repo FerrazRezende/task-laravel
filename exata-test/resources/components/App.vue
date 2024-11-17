@@ -1,3 +1,14 @@
+<script setup>
+
+import Header from "./partials/Header.vue";
+</script>
+
 <template>
-    <h1>App</h1>
+    <main>
+        <router-view></router-view>
+    </main>
 </template>
+
+<style scoped>
+
+</style>

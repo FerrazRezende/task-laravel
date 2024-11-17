@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
+:root {
+    --color-secondary: #051020;
+    --el-color-primary: rgb(248, 162, 0)!important;
+    --el-color-success: rgb(38, 38, 38)!important;
+    --el-color-white: #f8f8f8;
+
+
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oswald', sans-serif;
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
