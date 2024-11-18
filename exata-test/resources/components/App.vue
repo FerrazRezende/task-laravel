@@ -1,6 +1,14 @@
 <script setup>
+import {useAuthStore} from "../js/stores/authStore.js";
+import {onMounted} from "vue";
 
-import Header from "./partials/Header.vue";
+const authStore = useAuthStore()
+
+onMounted(() => {{
+    authStore.checkSession()
+}});
+
+
 </script>
 
 <template>

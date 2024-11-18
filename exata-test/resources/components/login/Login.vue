@@ -5,7 +5,7 @@ import LoginForm from './LoginForm.vue'
 
 <template>
     <main>
-        <section>
+        <div class="login-container">
             <div class="top-container">
                 <img src="https://www.exata.it/wp-content/uploads/2023/03/exata-icone-cloud-intelligence-min.png">
                 <h1>Seja bem vindo!</h1>
@@ -14,7 +14,7 @@ import LoginForm from './LoginForm.vue'
             <div class="form-container">
                 <LoginForm />
             </div>
-        </section>
+        </div>
     </main>
 </template>
 
@@ -30,7 +30,7 @@ main {
 
 }
 
-section {
+.login-container {
     width: 318px;
     height: 100vh;
     background-color: var(--el-color-success);

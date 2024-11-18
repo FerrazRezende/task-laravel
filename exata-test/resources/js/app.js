@@ -16,6 +16,9 @@ import {
     FaTasks,
     BiInfoCircle,
     HiUserGroup,
+    FaEdit,
+    MdDeleteforever
+
 } from "oh-vue-icons/icons";
 
 import App from '../components/App.vue'
@@ -33,6 +36,8 @@ addIcons(
     FaTasks,
     BiInfoCircle,
     HiUserGroup,
+    FaEdit,
+    MdDeleteforever
 );
 
 // --------- //

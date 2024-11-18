@@ -3,23 +3,18 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\AuthRequest;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
-    {
-        $request->validate([
-            'nome' => 'required|string|max:255',
-            'nome_usuario' => 'required|string|max:255',
-            'password' => 'required|string|min:8|confirmed',
-            'admin' => 'boolean',
-        ]);
 
+    public function register(AuthRequest $request): JsonResponse
+    {
         $user = User::create([
             'nome' => $request->nome,
             'nome_usuario' => $request->nome_usuario,
@@ -39,12 +34,9 @@ class AuthController extends Controller
 
     }
 
-    public function login(Request $request)
+
+    public function login(AuthRequest $request): JsonResponse
     {
-        $request->validate([
-            'nome_usuario' => 'required|string|max:255',
-            'password' => 'required|string|min:8',
-        ]);
 
         if (!Auth::attempt(['nome_usuario' => $request->nome_usuario, 'password' => $request->password])) {
             return response()->json(['message' => 'Credenciais inválidas'], 401);
@@ -61,14 +53,16 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function logout()
+
+    public function logout(): JsonResponse
     {
         Auth::user()->tokens()->delete();
 
         return response()->json(['message' => 'Logout realizado com sucesso']);
     }
 
-    public function check(Request $request)
+
+    public function check(Request $request): JsonResponse
     {
         $user = Auth::user();
 

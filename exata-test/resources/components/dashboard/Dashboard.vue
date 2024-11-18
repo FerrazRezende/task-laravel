@@ -6,11 +6,7 @@ import Header from "../partials/Header.vue";
 import {useAuthStore} from "../../js/stores/authStore.js";
 
 
-const authStore = useAuthStore()
 
-onMounted(() => {{
-    authStore.checkSession()
-}});
 
 </script>
 
@@ -43,17 +39,6 @@ onMounted(() => {{
 </template>
 
 <style scoped>
-section {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    color: var(--el-color-white);
-}
-
-article {
-    color: black;
-    padding: 16px;
-}
 
 span {
     font-size: 3rem;

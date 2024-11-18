@@ -4,6 +4,7 @@ import Login from '../../components/login/Login.vue';
 import Dashboard from '../../components/dashboard/Dashboard.vue';
 import Tarefas from "../../components/tarefas/Tarefas.vue";
 import Perfil from "../../components/user/Perfil.vue";
+import ListaUsuarios from "../../components/user/ListaUsuarios.vue";
 
 const routes = [
     { path: '/', component: Index },
@@ -17,6 +18,13 @@ const routes = [
     {
         path: '/perfil',
         component: Perfil,
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/usuarios',
+        component: ListaUsuarios,
         meta: {
             requiresAuth: true
         }

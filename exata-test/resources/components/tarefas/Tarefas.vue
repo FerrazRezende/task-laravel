@@ -44,12 +44,7 @@ const toggleCollapse = (index) => {
 </template>
 
 <style scoped>
-section {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    color: var(--el-color-white);
-}
+
 
 .task-container {
     height: 75%;
@@ -73,10 +68,5 @@ section {
     height: 255px !important;
 }
 
-article {
-    color: black;
-    padding: 16px;
-    width: 100vw;
-}
 
 </style>
