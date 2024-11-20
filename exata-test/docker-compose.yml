@@ -1,30 +1,19 @@
-version: '3.8'
-
+version: "3.9"
 services:
-    postgres:
-        image: postgres:latest
-        container_name: postgres
+    mysql:
+        image: mysql:latest
+        container_name: mysql
         restart: always
         environment:
-            POSTGRES_USER: ${DB_USERNAME}
-            POSTGRES_PASSWORD: ${DB_PASSWORD}
-            POSTGRES_DB: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            TZ: 'America/Sao_Paulo'
         ports:
-            - "5432:5432"
+            - "3306:3306"
         volumes:
-            - postgres_data:/var/lib/postgresql/data
-
-    pgadmin:
-        image: dpage/pgadmin4:latest
-        container_name: pgadmin
-        restart: always
-        environment:
-            PGADMIN_DEFAULT_EMAIL: ${DBADMIN_MAIL}
-            PGADMIN_DEFAULT_PASSWORD: ${DB_PASSWORD}
-        ports:
-            - "8080:80"
-        depends_on:
-            - postgres
+            - mysql_data:/var/lib/mysql
 
 volumes:
-    postgres_data:
+    mysql_data:

@@ -17,8 +17,15 @@ import {
     BiInfoCircle,
     HiUserGroup,
     FaEdit,
-    MdDeleteforever
-
+    MdDeleteforever,
+    HiPlusCircle,
+    CoSortAscending,
+    CoSortDescending,
+    IoCloseCircleOutline,
+    MdPlaylistaddSharp,
+    BiLinkedin,
+    BiGithub,
+    BiWhatsapp
 } from "oh-vue-icons/icons";
 
 import App from '../components/App.vue'
@@ -37,7 +44,16 @@ addIcons(
     BiInfoCircle,
     HiUserGroup,
     FaEdit,
-    MdDeleteforever
+    MdDeleteforever,
+    HiPlusCircle,
+    CoSortAscending,
+    CoSortDescending,
+    IoCloseCircleOutline,
+    MdPlaylistaddSharp,
+    BiLinkedin,
+    BiGithub,
+    BiWhatsapp
+
 );
 
 // --------- //
@@ -50,7 +66,7 @@ const app = createApp();
 app.component('app', App)
 app.component("v-icon", OhVueIcon);
 
-app.use(router)
+app.use(router);
 app.use(ElementPlus);
 app.use(pinia);
 

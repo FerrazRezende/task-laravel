@@ -1,30 +1,37 @@
 <script setup>
-import router from '../../js/routes/router.js'
+import router from '../../js/routes/router.js';
 import { defineEmits } from 'vue';
 
 
-const emit = defineEmits(['openModal'])
+// ----------------
+// - Propriedades -
+// ----------------
+const emit = defineEmits(['openModal']);
 
+
+// -----------
+// - Funções -
+// -----------
 const openModal = () => {
-    emit('openModal')
+    emit('openModal');
 }
-
 const goToLogin = () => {
-    router.push('/login')
+    router.push('/login');
 }
-
-
 </script>
 
 <template>
     <header>
+
         <div>
             <img src="https://www.exata.it/wp-content/uploads/2023/02/logo-Exata-white1-1.png">
         </div>
+
         <div>
             <el-button @click="goToLogin" class="login" type="primary">Login </el-button>
             <el-button @click="openModal" class="cadastro" type="success">Cadastro </el-button>
         </div>
+
     </header>
 </template>
 

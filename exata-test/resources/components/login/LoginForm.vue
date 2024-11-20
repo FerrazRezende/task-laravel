@@ -2,18 +2,25 @@
 import {ref} from "vue";
 import {useAuthStore} from "../../js/stores/authStore.js";
 import {ElNotification} from "element-plus";
-import router from "../../js/routes/router.js"
+import router from "../../js/routes/router.js";
 
+// ----------------
+// - Propriedades -
+// ----------------
 const username = ref("");
 const password = ref("");
 
+
+// -----------
+// - Funções -
+// -----------
 const handleLogin = async () => {
     const authStore = useAuthStore();
 
     const success = await authStore.login(username.value, password.value);
 
     if(success) {
-        router.push('/dashboard')
+        router.push('/dashboard');
 
     } else {
         ElNotification({
@@ -22,14 +29,11 @@ const handleLogin = async () => {
             type: 'error',
         });
     }
-
-}
-
-
-
+};
 </script>
 
 <template>
+
     <el-form
         ref=""
         style="max-width: 600px"
@@ -37,9 +41,11 @@ const handleLogin = async () => {
         label-width="auto"
         class="demo-ruleForm"
     >
+
         <el-form-item label="Usuário" prop="username">
             <el-input v-model="username" type="text" autocomplete="off" />
         </el-form-item>
+
         <el-form-item label="Senha" prop="password">
             <el-input
                 v-model="password"
@@ -47,6 +53,7 @@ const handleLogin = async () => {
                 autocomplete="off"
             />
         </el-form-item>
+
         <el-form-item>
             <div class="btn-container">
                 <el-button @click="handleLogin" class="login-btn" type="primary">
@@ -55,6 +62,7 @@ const handleLogin = async () => {
                 <el-button link>Esqueci a senha</el-button>
             </div>
         </el-form-item>
+
     </el-form>
 </template>
 

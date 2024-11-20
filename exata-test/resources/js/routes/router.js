@@ -7,7 +7,10 @@ import Perfil from "../../components/user/Perfil.vue";
 import ListaUsuarios from "../../components/user/ListaUsuarios.vue";
 
 const routes = [
-    { path: '/', component: Index },
+    {
+        path: '/',
+        component: Index
+    },
     {
         path: '/login',
         component: Login,
@@ -50,8 +53,9 @@ const router = createRouter({
     routes,
 });
 
+// Redirecionando para o dashboard caso esteja autenticado e para o /login caso não esteja
 router.beforeEach((to, from, next) => {
-    const isAuthenticated = sessionStorage.getItem('access_token') !== null;
+    const isAuthenticated = localStorage.getItem('access_token') !== null;
 
     if (to.meta.requiresAuth && !isAuthenticated) {
         next('/login');

@@ -1,19 +1,20 @@
 <script setup>
-
 import {useAuthStore} from "../../js/stores/authStore.js";
-import router from '../../js/routes/router.js'
+import router from '../../js/routes/router.js';
 
-const authStore = useAuthStore()
-
-
-
+// ----------------
+// - Propriedades -
+// ----------------
+const authStore = useAuthStore();
 </script>
 
 <template>
     <main>
+
         <div class="logo-container">
             <img src="https://www.exata.it/wp-content/uploads/2023/03/exata-icone-cloud-intelligence-min.png">
         </div>
+
         <div>
             <el-button text @click="router.push('/dashboard')">Home</el-button>
             <el-divider direction="vertical" />
@@ -28,6 +29,7 @@ const authStore = useAuthStore()
             >
                 <a @click="authStore.logout()"><v-icon class="logout-icon" name="md-logout" /></a>
             </el-tooltip>
+
         </div>
     </main>
 </template>

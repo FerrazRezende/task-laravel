@@ -13,29 +13,16 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = [
-            [
-                'nome' => 'Administrador',
-                'nome_usuario' => 'admin',
-                'password' => Hash::make('12345678'),
-                'admin' => true,
-            ],
-            [
-                'nome' => 'João Silva',
-                'nome_usuario' => 'joaosilva',
-                'password' => Hash::make('senha123'),
-                'admin' => false,
-            ],
-            [
-                'nome' => 'Maria Oliveira',
-                'nome_usuario' => 'mariaoliveira',
-                'password' => Hash::make('maria123'),
-                'admin' => false,
-            ],
-        ];
 
-        foreach ($users as $user) {
-            User::create($user);
-        }
+        // Cria o admin padrão e 10 usuarios aleatórios do factory
+        User::create([
+            'nome' => 'Administrador',
+            'nome_usuario' => 'admin',
+            'password' => Hash::make('12345678'),
+            'admin' => true,
+            'data_criacao' => now(),
+        ]);
+
+        User::factory(10)->create();
     }
 }

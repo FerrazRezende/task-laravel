@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
+    // Endpoint para listagem de todos os usuários cadastrados.
+    // Acesso apenas a administradores.
+
+    // Há dois enpoints para listagem: um com paginação e um sem. O endpoint sem paginação é usado
+    // para exibir os dados no form select do filtro de usuários, liberados apenas para admins
     public function index(): JsonResponse
     {
         $this->authorizeAdmin();
@@ -18,10 +24,18 @@ class UserController extends Controller
         return response()->json($users, 200);
     }
 
-    public function getUserById(int $id): JsonResponse
+    // Todos os usuários com paginação, para ser exibido na tabela de usuários
+    public function listAllPage(): JsonResponse
     {
         $this->authorizeAdmin();
 
+        $users = User::paginate(10);
+
+        return response()->json($users, 200);
+    }
+
+    public function getUserById(int $id): JsonResponse
+    {
         $user = User::find($id);
 
         if (!$user) {
@@ -35,8 +49,6 @@ class UserController extends Controller
 
     public function update(UserRequest $request, int $id): JsonResponse
     {
-        $this->authorizeAdmin();
-
         $user = User::find($id);
 
         if (!$user) {
@@ -47,16 +59,12 @@ class UserController extends Controller
 
         $validated = $request->validated();
 
-
-        if (isset($validated['password'])) {
-            $validated['password'] = Hash::make($validated['password']);
-        }
-
         $user->update($validated);
 
         return response()->json($user, 200);
     }
 
+    // Somente admin pode excluir um usuário
     public function delete(int $id): JsonResponse
     {
         $this->authorizeAdmin();
@@ -76,7 +84,8 @@ class UserController extends Controller
         ], 200);
     }
 
-    private function authorizeAdmin(): void
+    // Função para permitir que o admin acesse os endpoints restritos
+    public function authorizeAdmin(): void
     {
         if(!auth()->user() || !auth()->user()->admin) {
             abort(403, 'Acesso negado!');

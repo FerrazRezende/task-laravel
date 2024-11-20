@@ -1,19 +1,22 @@
 <script setup>
-import LoginForm from './LoginForm.vue'
+import LoginForm from './LoginForm.vue';
 
 </script>
 
 <template>
     <main>
         <div class="login-container">
+
             <div class="top-container">
                 <img src="https://www.exata.it/wp-content/uploads/2023/03/exata-icone-cloud-intelligence-min.png">
                 <h1>Seja bem vindo!</h1>
                 <h2>Entre com suas credenciais:</h2>
             </div>
+
             <div class="form-container">
                 <LoginForm />
             </div>
+
         </div>
     </main>
 </template>

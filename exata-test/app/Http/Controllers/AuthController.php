@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Http\Requests\AuthRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -15,6 +14,16 @@ class AuthController extends Controller
 
     public function register(AuthRequest $request): JsonResponse
     {
+        $validated = $request->validated();
+
+
+        // Verifica se os dados estão validos de acordo com o AuthRequest
+        if (!$validated) {
+            return response()->json([
+                'message' => 'Dados inválidos!',
+            ], 422);
+        }
+
         $user = User::create([
             'nome' => $request->nome,
             'nome_usuario' => $request->nome_usuario,
@@ -37,7 +46,6 @@ class AuthController extends Controller
 
     public function login(AuthRequest $request): JsonResponse
     {
-
         if (!Auth::attempt(['nome_usuario' => $request->nome_usuario, 'password' => $request->password])) {
             return response()->json(['message' => 'Credenciais inválidas'], 401);
         }
@@ -53,7 +61,6 @@ class AuthController extends Controller
         ], 200);
     }
 
-
     public function logout(): JsonResponse
     {
         Auth::user()->tokens()->delete();
@@ -61,7 +68,7 @@ class AuthController extends Controller
         return response()->json(['message' => 'Logout realizado com sucesso']);
     }
 
-
+    // Função usada para verificar se o token permanece valido e caso positivo, mantém a sessão no front-end
     public function check(Request $request): JsonResponse
     {
         $user = Auth::user();

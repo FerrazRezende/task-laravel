@@ -10,19 +10,17 @@ use Tests\TestCase;
 
 class AuthControllerTest extends TestCase
 {
-
     use RefreshDatabase;
     use WithFaker;
 
-
     /** @test */
-    public function a_user_can_register(): void
+    public function test_se_usuario_pode_registrar(): void
     {
         $response = $this->postJson('/api/register', [
             'nome' => $this->faker->name(),
             'nome_usuario' => $this->faker->userName(),
-            'password' => 'password123',
-            'password_confirmation' => 'password123',
+            'password' => 'Password123',
+            'password_confirmation' => 'Password123',
             'admin' => false
         ]);
 
@@ -31,13 +29,26 @@ class AuthControllerTest extends TestCase
     }
 
     /** @test */
-    public function a_user_cannot_register_with_invalid_data()
+    public function test_se_usuario_nao_pode_registrar_com_dados_invalidos()
     {
         $response = $this->postJson('/api/register', [
-            'nome' => '',
-            'nome_usuario' => '',
-            'password' => '123',
-            'password_confirmation' => '456',
+            'nome' => ' ',
+            'nome_usuario' => ' ',
+            'password' => '12345678M',
+            'password_confirmation' => '12345678M',
+            'admin' => true
+        ]);
+
+        $response->assertStatus(422);
+    }
+
+    public function test_se_usuario_nao_pode_registrar_com_senha_fora_padrao()
+    {
+        $response = $this->postJson('/api/register', [
+            'nome' => 'Matheus',
+            'nome_usuario' => 'mtsferraz',
+            'password' => 'senha12345',
+            'password_confirmation' => 'senha12345',
             'admin' => true
         ]);
 
@@ -45,7 +56,7 @@ class AuthControllerTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_login()
+    public function test_se_usuario_pode_logar()
     {
         $user = User::factory()->create([
             'nome_usuario' => 'testuser',
@@ -67,7 +78,7 @@ class AuthControllerTest extends TestCase
     }
 
     /** @test */
-    public function a_user_cannot_login_with_invalid_credentials()
+    public function test_se_usuario_forneceu_credenciais_invalidas()
     {
         $response = $this->postJson('/api/login', [
             'nome_usuario' => 'nonexistentuser',

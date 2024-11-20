@@ -3,7 +3,7 @@
 namespace App\Enums;
 
 enum StatusTarefa: string {
-    case EM_ABERTO = 'Em aberto';
+    case PENDENTE = 'Pendente';
     case EM_ANDAMENTO = 'Em andamento';
     case CONCLUIDO = 'Concluido';
 

@@ -44,7 +44,7 @@ class User extends Authenticatable
     protected $casts = [
         'admin' => 'boolean',
         'data_criacao' => 'datetime',
-        'password' => 'hashed', // hash no Laravel 10+
+        'password' => 'hashed',
     ];
 
 

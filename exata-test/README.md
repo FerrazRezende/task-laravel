@@ -1,66 +1,118 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<img src="https://www.exata.it/wp-content/uploads/2023/02/logo-Exata-white1-1.png" width="400" alt="Laravel Logo">
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Desafio técnico Exata Tech
 
-## About Laravel
+Este projeto é um sistema de gerenciamento de tarefas desenvolvido como parte de um desafio técnico para uma vaga de desenvolvedor júnior na Exata Tech. A aplicação foi construída utilizando Vue.js no frontend e Laravel no backend.
+## Design do banco de dados
+<img src="https://i.ibb.co/t3CzR3p/imagem-2024-11-20-013146451.png">
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+[DrawDB](https://drawdb.vercel.app/editor)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# Requisitos
+## Requisitos funcionais
 
-## Learning Laravel
+| RF    | Requisito                                                                                  |
+|-------|--------------------------------------------------------------------------------------------|
+| RF001 | **CRUD Tarefas**: Usuários autenticados podem criar, editar, visualizar e excluir tarefas. |
+| RF002 | **CRUD Tarefas:** Cada tarefa deve ter um título, descrição e status (ex: "pendente", "em andamento", "concluída"). |
+| RF003 | **Filtros e ordenação:** Permitir que as tarefas sejam filtradas por status e ordenadas por data de criação ou atualização. |
+| RF004 | **Validações:** Implementar validações básicas para garantir que os campos obrigatórios sejam preenchidos e que os dados estejam no formato adequado. |
+| RF005 | **Perfil de usuário: Adicionar uma distinção entre** usuários comuns e um perfil “admin” |
+| RF006 | **Perfil de usuário:** Usuários comuns devem visualizar apenas as tarefas que eles mesmos criaram |
+| RF007 | **Perfil de Usuário:** O usuário com perfil "admin" deve ter acesso a todas as tarefas criadas no sistema. |
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Requisitos não funcionais
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+| RNF    | Requisito                             |
+|--------|---------------------------------------|
+| RNF001 | Framework Laravel                     |
+| RNF002 | Front-end em VueJs                    |
+| RNF003 | Migrações para criação de tabelas     |
+| RNF004 | Seeders para popular o banco de dados |
+| RNF005 | Arquitetura MVC                       |
+| RNF006 | Teste unitários (diferencial)         |
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+# Ferramentas utilizadas:
+* Front-end: [VueJs](https://vuejs.org)
+* UI: [ElementPlus](https://element-plus.org/en-US/)
+* Requisições: [Axios](https://axios-http.com/ptbr/docs/intro)
+* Store: [Pinia](https://pinia.vuejs.org)
+* Banco do Dados: [MySQL](https://www.mysql.com) + [Docker](https://docs.docker.com/compose/)
+* Back-end: [Laravel](https://laravel.com)
+* Testes: [Postman](https://www.postman.com)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# [Video de demonstração](https://www.youtube.com/watch?v=auv2PeXZCi0)
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Seeders
+Conforme especificado nos requisitos, utilizei seeders com factories para gerar dados de teste de forma aleatória.
 
-## Contributing
+O seeder de usuários primeiro cria um usuário administrador com a senha variando entre 1 e 8 caracteres. Em seguida, ele gera 10 usuários aleatórios utilizando o factory.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Exemplo de factory para tarefas:
+```php
+<?php
 
-## Code of Conduct
+namespace Database\Factories;
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+use App\Enums\StatusTarefa;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-## Security Vulnerabilities
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tarefas>
+ */
+class TarefasFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            'titulo' => $this->faker->sentence(3),
+            'descricao' => $this->faker->paragraph(),
+            'status' => $this->faker->randomElement(StatusTarefa::values()),
+            'data_criacao' => now(),
+            'data_modificacao' => $this->faker->optional()->dateTimeBetween('-1 month', 'now'),
+            'user_id' => \App\Models\User::factory(),
+        ];
+    }
+}
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Admin
+O usuário admin possui uma sessão especial onde pode visualizar, editar ou excluir todos os usuários da aplicação.
 
-## License
+<img src="https://i.ibb.co/yBBbcW6/imagem-2024-11-20-024434035.png">
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+No painel de tarefas, implementei uma funcionalidade adicional para administradores, permitindo filtrar as tarefas com base nos usuários.
+<img src="https://i.ibb.co/t2dvd8w/imagem-2024-11-20-024614514.png" alt="imagem-2024-11-20-024614514" border="0">
+
+---
+
+## Testes
+Com o objetivo de verificar algumas funcionalidades e também garantir uma cobertura básica na aplicação, implementei testes unitários para os principais controllers.
+
+### UserController
+Os testes para o UserController foram focados nas rotas confidenciais, que são liberadas apenas para administradores. Os testes incluem cenários de acesso permitido e negado para essas rotas.
+
+### TarefasController
+Nos testes do TarefasController, o objetivo foi validar todas as funções do CRUD. Com mais tempo, eu também adicionaria testes para verificar a validação dos dados de entrada. 😅
+
+### AuthController
+Nos testes do AuthController, foquei principalmente nas validações dos dados. Testei a validação da senha, dos campos nome e nome de usuário, além de verificar se credenciais inválidas realmente rejeitavam o login.
+
+<img src="https://i.ibb.co/KWf6Fyc/imagem-2024-11-20-025600373.png" alt="imagem-2024-11-20-025600373" border="0">
+
+# Considerações finais
+Desenvolver esse projeto foi desafiador, especialmente com o prazo apertado de apenas 6 dias. No entanto, eu já havia aplicado conceitos semelhantes em um projeto pessoal com amigos, no qual desenvolvemos um sistema de tarefas utilizando Vue.js + FastAPI. Isso fez com que muitos aspectos do desenvolvimento fossem familiares, o que facilitou a execução.
+
+Além disso, muitos conceitos do desenvolvimento web se mantêm consistentes, independentemente da tecnologia utilizada. Por exemplo, tanto no FastAPI quanto no Laravel, o processo de migração de banco de dados é muito parecido, e eu consegui aproveitar esses conhecimentos para acelerar o desenvolvimento deste projeto.
+
+Estou satisfeito com o resultado e espero que ele atenda às expectativas.

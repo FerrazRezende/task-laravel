@@ -1,14 +1,47 @@
 <script setup>
-import { ref } from 'vue';
+import {onMounted, ref} from 'vue';
 import { useAuthStore } from "../../js/stores/authStore.js";
 import router from '../../js/routes/router.js';
+import userService from "../../js/services/userService.js";
+import {ElNotification} from "element-plus";
 
+// ----------------
+// - Propriedades -
+// ----------------
 const active = ref(2);
 const profilePicture = ref("https://static.thenounproject.com/png/354384-200.png");
-
+const userData = ref({});
+const loading = ref(true);
 const authStore = useAuthStore();
-
 const subAtual = window.location.href;
+
+// -----------
+// - Funções -
+// -----------
+const fetchUser = async () => {
+    const response = await userService.getUserById(authStore.userId);
+
+    if (response.data) {
+        userData.value = response.data;
+        loading.value = false;
+    } else {
+        ElNotification({
+            title: "Erro",
+            message: "Erro ao recuperar dados",
+            type: "error"
+        });
+    }
+};
+
+// -----------
+// - Eventos -
+// -----------
+onMounted(() => {{
+    authStore.checkSession();
+    setTimeout(() => {
+        fetchUser();
+    },1000);
+}});
 
 if (subAtual.includes('/tarefas')) {
     active.value = 3;
@@ -24,15 +57,17 @@ if (subAtual.includes('/dashboard')) {
 
         <div class="avatar-container">
             <el-avatar :size="48" :src="profilePicture" >
-<!--                <el-skeleton :loading="loading" animated>-->
-<!--                    <template #template>-->
-<!--                        <el-skeleton-item variant="circle" />-->
-<!--                    </template>-->
-<!--                </el-skeleton>-->
 
             </el-avatar>
+
+            <el-skeleton style="width: 40%; padding: 0 8px"  :loading="loading" animated>
+                <template #template>
+                    <el-skeleton-item variant="p" />
+                </template>
+            </el-skeleton>
+
             <div class="nome-container">
-                <p>Matheus</p>
+                <p v-if="!loading">{{ userData.nome }}</p>
                 <el-tag
                     v-if="authStore.isAdmin"
                     type="primary"
@@ -43,20 +78,11 @@ if (subAtual.includes('/dashboard')) {
                 </el-tag>
             </div>
 
-<!--            <el-skeleton style="width: 150px" :loading="loading" animated>-->
-<!--                <template #template>-->
-<!--                    <el-skeleton-item variant="p" style="width: 120px;"/>-->
-<!--                </template>-->
-
-<!--            </el-skeleton>-->
-
         </div>
 
         <div class="divider-container">
             <el-divider />
         </div>
-
-
 
         <el-menu
             :default-active="active"

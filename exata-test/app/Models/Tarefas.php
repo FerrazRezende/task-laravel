@@ -8,6 +8,8 @@ use App\Enums\StatusTarefa;
 
 class Tarefas extends Model
 {
+    public $timestamps = false;
+
     use HasFactory;
 
     protected $fillable = [
@@ -16,7 +18,6 @@ class Tarefas extends Model
         'status',
         'data_criacao',
         'data_modificacao',
-        'data_conclusao',
         'user_id',
     ];
 
@@ -25,6 +26,7 @@ class Tarefas extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    // Transforma os dados da coluna status para o tipo StatusTarefa(ENUM)
     protected $casts = [
         'status' => StatusTarefa::class,
     ];

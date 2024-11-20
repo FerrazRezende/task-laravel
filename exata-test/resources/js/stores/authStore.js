@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
 import router from '../routes/router.js'
 import AuthService from "../services/authService.js";
 import {ElNotification} from "element-plus";
 
 export const useAuthStore = defineStore('authStore', {
 
+    // Variáveis de estado
     state: () => ({
         token: null,
         tokenType: null,
@@ -14,19 +14,17 @@ export const useAuthStore = defineStore('authStore', {
     }),
 
     actions: {
-
         async register(payload) {
-
             try {
-
-                const response = await AuthService.register(payload)
+                const response = await AuthService.register(payload);
 
                 if(response.data) {
                     ElNotification({
                         title: 'Ok',
                         message: 'Conta registrada com sucesso!',
                         type: 'success'
-                    })
+                    });
+                    return true;
                 }
 
             } catch(err) {
@@ -34,20 +32,18 @@ export const useAuthStore = defineStore('authStore', {
                     title: 'Erro',
                     message: 'Falha ao criar a conta',
                     type: 'success'
-                })
+                });
             }
-
         },
 
         async login(nome_usuario, password) {
             try {
-
                 const credentials = {
                     "nome_usuario": nome_usuario,
                     "password": password
-                }
+                };
 
-                const response = await AuthService.login(credentials)
+                const response = await AuthService.login(credentials);
 
                 if (response.data && response.data.access_token) {
                     this.token = response.data.access_token;
@@ -56,9 +52,9 @@ export const useAuthStore = defineStore('authStore', {
                     this.isAdmin = response.data.is_admin;
                     this.isAuthenticated = true;
 
-                    sessionStorage.setItem('access_token', response.data.access_token);
+                    localStorage.setItem('access_token', response.data.access_token);
 
-                    return true
+                    return true;
                 } else {
                     ElNotification({
                         title: 'Erro',
@@ -67,26 +63,25 @@ export const useAuthStore = defineStore('authStore', {
                     });
                 }
             } catch (err) {
-                console.log(err)
-                return false
+                return false;
             }
         },
 
         async logout() {
             try {
-                const response = await AuthService.logout()
+                const response = await AuthService.logout();
 
                 if (response.data) {
                     this.$reset();
-                    sessionStorage.removeItem('access_token');
+                    localStorage.removeItem('access_token');
 
-                    await router.push("/")
+                    await router.push("/");
 
                     ElNotification({
                         title: 'Sucesso',
                         message: 'Logout efetuado com sucesso!',
                         type: 'success',
-                    })
+                    });
 
                 } else {
                     ElNotification({
@@ -95,9 +90,7 @@ export const useAuthStore = defineStore('authStore', {
                         type: 'error',
                     });
                 }
-
             } catch(err) {
-                console.error("Erro ao fazer logout:", err);
                 ElNotification({
                     title: 'Erro',
                     message: 'Ocorreu um erro inesperado ao fazer logout',
@@ -108,21 +101,14 @@ export const useAuthStore = defineStore('authStore', {
 
         async checkSession() {
             try {
-                const response = await AuthService.check()
+                const response = await AuthService.check();
 
                 if (response.data) {
-                    this.isAdmin = response.data.is_admin
-                    this.userId = response.data.user_id
+                    this.isAdmin = response.data.is_admin;
+                    this.userId = response.data.user_id;
                 }
             } catch(err){
-                ElNotification({
-                    title: 'Erro',
-                    message: 'Ocorreu um erro inesperado ao restaurar a sessão',
-                    type: 'error',
-                });
             }
-        }
+        },
     }
-
-
 })
