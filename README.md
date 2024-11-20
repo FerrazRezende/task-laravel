@@ -4,7 +4,7 @@
 
 Este projeto é um sistema de gerenciamento de tarefas desenvolvido como parte de um desafio técnico para uma vaga de desenvolvedor júnior na Exata Tech. A aplicação foi construída utilizando Vue.js no frontend e Laravel no backend.
 ## Design do banco de dados
-<img src="https://i.ibb.co/yp2kg7P/image.png">
+<img src="https://i.ibb.co/7b0s5kG/image.png">
 
 [DrawDB](https://drawdb.vercel.app/editor)
 
